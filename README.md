@@ -74,7 +74,7 @@ curl -X 'POST' \
 
 ### Sample Response (스트리밍 켰을때)
 
-```json
+```
 	
 data: {"id": "c5077338-09b8-4a3f-ac51-6d5cbadef2ba", "object": "chat.completion.chunk", "created": 1722843584, "choices": [{"index": 0, "delta": {"role": "assistant", "content": "UserProxy (to chat_manager):\nMicrosoft stock price\n\n--------------------------------------------------------------------------------\n"}, "finish_reason": "stop"}]}
 
@@ -98,5 +98,5 @@ data: {"id": "7d9f632d-a84e-4c82-b580-0cadf2c8877a", "object": "chat.completion.
 브라우저에서 아래 URL접속
 
 ```
-http://localhost:8081/autogen/api/v1/docs
+http://localhost:8000/autogen/api/v1/docs
 ```
