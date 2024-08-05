@@ -1,0 +1,16 @@
+
+###
+POST http://localhost:8000/autogen/api/v1/chat/completions HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{
+
+  "messages": [
+    {
+      "role": "user",
+      "content": "최근 마이크로소프트 주식 분석좀 해줘"
+    }
+  ],
+  "stream": true
+}
