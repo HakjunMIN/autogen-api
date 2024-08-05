@@ -2,6 +2,7 @@ from .autogen_server import serve_autogen
 from .data_model import Input
 from fastapi import FastAPI
 from starlette.responses import RedirectResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 base = "/autogen/"
 prefix = base + "api/v1"
@@ -14,6 +15,17 @@ app = FastAPI(
     docs_url=docs_url,
     redoc_url=None,
 )
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get(path=base, include_in_schema=False)
 async def docs_redirect():
