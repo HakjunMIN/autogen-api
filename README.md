@@ -99,7 +99,7 @@ data: {"id": "7d9f632d-a84e-4c82-b580-0cadf2c8877a", "object": "chat.completion.
 브라우저에서 아래 URL접속
 
 ```
-http://localhost:8000/autogen/api/v1/docs
+http://localhost:8000/autogen/api/v1/completions/docs
 ```
 
 ## Workflow추가 방법
