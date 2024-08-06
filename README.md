@@ -39,14 +39,15 @@ mv OAI_CONFIG_LIST_yours.json OAI_CONFIG_LIST.json
 
 ### fastAPI구동
 ```sh
-uvicorn --reload app.main:app --host 0.0.0.0 
+cd app
+uvicorn --reload main:app --host 0.0.0.0 
 ```
 ### 테스트
 
 You can query the autogen agents using the following command: 
 ```sh
 curl -X 'POST' \
-  'http://localhost:8000/autogen/api/v1/chat/completions' \
+  'http://localhost:8000/autogen/api/v1/completions/autogen-workflow' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -100,3 +101,10 @@ data: {"id": "7d9f632d-a84e-4c82-b580-0cadf2c8877a", "object": "chat.completion.
 ```
 http://localhost:8000/autogen/api/v1/docs
 ```
+
+## Workflow추가 방법
+
+- `workflow` 디렉토리에 파일 추가 후 `AutogenWorkFlow`를 상속받아 구현. 
+- `__init()__`에서 실제 workflow구현.
+- `self.chat_manager`가 기본적으로 UserProxyAgent가 대화할 상대이므로 반드시 지정
+- 필요 시 `run()` 오버라이드

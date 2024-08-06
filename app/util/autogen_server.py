@@ -7,13 +7,13 @@ from threading import Thread
 from fastapi import HTTPException
 from fastapi.responses import StreamingResponse
 
-from .autogen_workflow import AutogenWorkflow
-from .data_model import Input, Output
+from workflow.autogen_workflow import AutogenWorkflow
+from model.data_model import Input, Output
 
-def serve_autogen(inp: Input):
+def serve_autogen(inp: Input, autogenWorkflow: AutogenWorkflow = AutogenWorkflow):
     model_dump = inp.model_dump()
     model_messages = model_dump["messages"]
-    workflow = AutogenWorkflow()
+    workflow = autogenWorkflow()
 
     if inp.stream:
         queue = Queue()

@@ -6,7 +6,7 @@ from queue import Queue
 
 from autogen import ChatResult, GroupChat, AssistantAgent, UserProxyAgent, GroupChatManager, config_list_from_json
 
-from .stream_util import streamed_print_received_message
+from util.stream_util import streamed_print_received_message
 
 config_list = config_list_from_json("./OAI_CONFIG_LIST.json")
 llm_config = {"config_list": config_list}
@@ -53,7 +53,7 @@ class AutogenWorkflow:
             max_round=10,
             send_introductions=True,
         )
-        self.group_chat_manager_with_intros = GroupChatManager(
+        self.chat_manager = GroupChatManager(
             groupchat=self.group_chat_with_introductions,
             llm_config=llm_config,
         )
@@ -88,13 +88,13 @@ class AutogenWorkflow:
                 index_counter["index"] += 1
                 return result
 
-            self.group_chat_manager_with_intros._print_received_message = types.MethodType(
+            self.chat_manager._print_received_message = types.MethodType(
                 streamed_print_received_message_with_queue_and_index,
-                self.group_chat_manager_with_intros,
+                self.chat_manager,
             )
 
         chat_history = self.user_proxy.initiate_chat(
-            self.group_chat_manager_with_intros, message=message,
+            self.chat_manager, message=message,
         )
         if stream:
             self.queue.put("[DONE]")
